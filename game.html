@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#21182f">
+<title>Подарки от Гарри Поттера</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #171221;
+  --panel: #251d33;
+  --panel2: #30243e;
+  --text: #f9f0e7;
+  --muted: #c7b8ce;
+  --gold: #f1ce8c;
+  --rose: #edbdd0;
+  --line: #ffffff20;
+  --green: #b9dfc4;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 10% 0%, #70426444, transparent 45%),
+    radial-gradient(ellipse at 100% 35%, #41527b33, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+button, input, select { font: inherit; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+button {
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 11px 17px;
+  background: var(--panel2);
+  color: var(--text);
+  cursor: pointer;
+  transition: background .18s, transform .18s, border-color .18s;
+}
+button:hover:not(:disabled) { background: #44324f; border-color: #f1ce8c80; }
+button:active:not(:disabled) { transform: translateY(1px); }
+button:disabled { opacity: .45; cursor: default; }
+button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+.primary {
+  background: var(--gold);
+  color: #2b2032;
+  font-weight: 750;
+  border-color: var(--gold);
+}
+.primary:hover:not(:disabled) { background: #ffe1a8; }
+.secondary { background: transparent; }
+.small { font-size: .87rem; }
+.muted { color: var(--muted); }
+.wrap { width: min(1120px, 100% - 32px); margin: auto; }
+header { padding: 44px 0 28px; text-align: center; }
+.eyebrow {
+  font-size: .75rem; letter-spacing: .19em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700;
+}
+h1, h2, h3, p { margin-top: 0; }
+h1, .serif { font-family: Georgia, "Times New Roman", serif; }
+h1 { margin: 12px auto; max-width: 780px; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.08; }
+h1 span { color: var(--rose); }
+h2 { font-size: 1.3rem; margin-bottom: 12px; }
+h3 { font-size: 1rem; }
+header p { max-width: 620px; margin: 16px auto; color: var(--muted); }
+.hero-badge {
+  display: inline-block; border: 1px solid var(--line); border-radius: 30px;
+  padding: 7px 14px; font-size: .8rem; color: var(--gold);
+}
+.panel {
+  background: linear-gradient(145deg, #30233c, #241d31);
+  border: 1px solid var(--line);
+  border-radius: 25px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 16px 50px #00000018;
+}
+.section-head { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+.section-head h2 { margin: 0; }
+.number {
+  width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%;
+  display: grid; place-items: center; background: #f1ce8c17; color: var(--gold);
+}
+details { border-top: 1px solid var(--line); padding-top: 14px; }
+summary { cursor: pointer; color: var(--gold); padding: 8px 0; }
+.rules { padding-left: 24px; color: var(--muted); }
+.rules li { margin: 9px 0; }
+.character-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.character {
+  text-align: left; padding: 18px; min-height: 128px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.character[aria-pressed="true"] {
+  border: 2px solid var(--gold); padding: 17px;
+  background: linear-gradient(120deg, #65503c66, #4f354d);
+}
+.character .emoji { font-size: 2rem; line-height: 1.2; margin-bottom: 7px; }
+.character strong { font-size: 1rem; }
+.character small { color: var(--muted); font-size: .78rem; }
+.start-line { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 18px; }
+.start-line p { margin: 0; flex: 1; min-width: 160px; font-size: .9rem; }
+.start-line button { min-width: 230px; }
+.layout { display: grid; grid-template-columns: 1.05fr 1fr; gap: 20px; align-items: start; }.game-panel { position: sticky; top: 16px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+.stat { padding: 7px 12px; background: #ffffff09; border-radius: 12px; font-size: .85rem; }
+.stat strong { color: var(--gold); }
+.board-shell {
+  padding: 9px; border-radius: 18px; background: #15101e;
+  border: 1px solid #f1ce8c30;
+}
+.board {
+  display: grid; grid-template-columns: repeat(11, 1fr);
+  gap: 2px; width: 100%; aspect-ratio: 1;
+  touch-action: none; user-select: none;
+}
+.cell {
+  display: grid; place-items: center; border-radius: 5px;
+  min-width: 0; aspect-ratio: 1; font-size: clamp(15px, 3.9vw, 25px);
+  position: relative;
+}
+.wall { background: #34283e; box-shadow: inset 0 1px #ffffff08; }
+.path { background: #201a2c; }
+.visited { background: #393047; }
+.cell.present { background: #6a495d66; }
+.cell.exit { background: #82704444; }
+.cell.hint { outline: 2px solid var(--gold); outline-offset: -2px; }
+.cell.player { background: var(--gold); box-shadow: 0 0 14px #f1ce8c55; z-index: 1; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .76rem; color: var(--muted); margin: 12px 0; }
+.game-message { min-height: 48px; color: var(--gold); font-size: .88rem; margin: 12px 0; }
+.controls { display: flex; gap: 20px; align-items: center; justify-content: center; }
+.dpad { display: grid; grid-template-columns: repeat(3, 56px); grid-template-rows: repeat(2, 54px); gap: 6px; }
+.dpad button { padding: 0; font-size: 1.4rem; border-radius: 14px; touch-action: manipulation; }
+.up { grid-column: 2; }
+.left { grid-row: 2; grid-column: 1; }
+.down { grid-row: 2; grid-column: 2; }
+.right { grid-row: 2; grid-column: 3; }
+.tools { display: flex; flex-direction: column; gap: 8px; }
+.tools button { font-size: .82rem; padding: 9px 12px; }
+.empty-state { padding: 30px 12px; text-align: center; color: var(--muted); }
+.empty-state .big { display: block; font-size: 4rem; margin-bottom: 14px; }
+.collection { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.gift-card { text-align: left; padding: 13px; min-height: 120px; }
+.gift-card[aria-pressed="true"] { border-color: var(--gold); background: #71564244; }
+.gift-card .gift-icon { font-size: 1.65rem; display: block; margin-bottom: 6px; }
+.gift-card strong { display: block; font-size: .84rem; line-height: 1.35; }
+.gift-card small { display: block; margin-top: 6px; color: var(--muted); font-size: .7rem; }
+.collection-note { font-size: .84rem; color: var(--muted); }
+.mix-count { color: var(--gold); white-space: nowrap; margin-left: auto; font-size: .9rem; }
+label { display: block; font-size: .87rem; margin: 14px 0 6px; color: var(--muted); }
+input, select {
+  width: 100%; min-height: 48px; background: #17121f; color: var(--text);
+  border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px;
+}
+.card-options { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.card-options button { flex: 1; font-size: .78rem; padding: 10px; }
+.card-options button[aria-pressed="true"] { border-color: var(--rose); background: #75465f55; }
+.letter {
+  color-scheme: light; background: #f5e8cf; color: #493b36;
+  border-radius: 7px 7px 18px 18px; padding: 25px;
+  box-shadow: 0 12px 35px #0003; position: relative; overflow-wrap: anywhere;
+}
+.letter::before {
+  content: ""; position: absolute; inset: 8px; border: 1px solid #9d775540;
+  pointer-events: none; border-radius: 3px 3px 12px 12px;
+}
+.letter-top { text-align: center; }
+.letter-top .crest { font-size: 2.5rem; }
+.letter-top h3 { font: bold 1.3rem Georgia, serif; letter-spacing: .08em; margin: 4px 0; }
+.letter-top small { color: #7d6556; }
+.letter hr { border: 0; border-top: 1px solid #9d775540; margin: 20px 0; }
+.letter p { font-size: .93rem; }
+.letter ul { padding-left: 20px; font-size: .88rem; }
+.postcard {
+  padding: 15px; border-radius: 12px; background: #a26a7912;
+  border: 1px dashed #a26a7960; margin: 16px 0;
+}
+.postcard strong { display: block; margin-bottom: 7px; }
+.postcard p { margin-bottom: 0; }
+.seal { text-align: right; font-size: 1.7rem; margin: 12px 0 0; }.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.actions button { flex: 1; font-size: .87rem; min-width: 150px; }
+.footer-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+footer { text-align: center; padding: 20px 0 32px; color: var(--muted); font-size: .78rem; }
+footer p { margin: 16px auto 0; max-width: 700px; }
+dialog {
+  color: var(--text); background: var(--panel); border: 1px solid #f1ce8c55;
+  border-radius: 24px; width: min(520px, calc(100% - 28px));
+  padding: 25px; max-height: 88dvh; overflow: auto;
+  box-shadow: 0 30px 100px #0008;
+}
+dialog::backdrop { background: #100b19cc; backdrop-filter: blur(5px); }
+dialog h2 { color: var(--gold); }
+.dialog-text { color: var(--muted); white-space: pre-line; }
+.dialog-actions { display: grid; gap: 12px; margin-top: 20px; }
+.choice { text-align: left; display: flex; gap: 14px; align-items: flex-start; padding: 17px; }
+.choice span { font-size: 2rem; }
+.choice strong { display: block; }
+.choice small { display: block; color: var(--muted); margin-top: 6px; }
+.toast {
+  position: fixed; left: 50%; bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%); z-index: 20; width: max-content; max-width: calc(100% - 32px);
+  padding: 13px 19px; background: var(--gold); color: #2b2032; border-radius: 15px;
+  box-shadow: 0 8px 30px #0005; text-align: center; font-size: .9rem;
+}
+[hidden] { display: none !important; }
+@media (max-width: 780px) {
+  .layout { grid-template-columns: 1fr; gap: 0; }
+  .game-panel { position: static; }
+  .character-grid { grid-template-columns: repeat(2, 1fr); }
+  header { padding-top: 30px; }
+  .panel { padding: 18px; border-radius: 20px; }
+  .cell { font-size: clamp(14px, 5vw, 26px); }
+  .board-shell { max-width: 470px; margin: auto; }
+}
+@media (max-width: 380px) {
+  .wrap { width: calc(100% - 20px); }
+  .panel { padding: 14px; }
+  .character { padding: 13px; }
+  .character[aria-pressed="true"] { padding: 12px; }
+  .controls { gap: 10px; }
+  .dpad { grid-template-columns: repeat(3, 50px); }
+  .letter { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="eyebrow">Хогвартс · совиная почта · маленькие чудеса</div>
+  <h1>Подарки от<br><span>Гарри Поттера</span></h1>
+  <p>Вечер в замке, немного волшебства и подарок именно для тебя.
+    Выбери спутника, найди тайники и собери свою идеальную посылку.</p>
+  <div class="hero-badge">✦ Без таймера · без проигрыша · в твоём темпе</div>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <div class="section-head"><span class="number">✦</span><h2>Твоя маленькая магическая пауза</h2></div>
+    <p class="muted">Один маршрут — четыре тайника. В каждом тебя ждёт выбор из двух подарков.
+      У каждого персонажа своя коллекция и своё настроение.</p>
+    <details>
+      <summary>Как играть — понятные правила</summary>
+      <ol class="rules">
+        <li>Выбери персонажа и нажми «Войти в лабиринт».</li>
+        <li>Передвигайся по коридорам кнопками-стрелками, свайпами по карте или стрелками клавиатуры.
+          Один шаг по коридору — один ход. Стена ход не забирает.</li>
+        <li>Найди все четыре 🎁. В каждом тайнике выбери один из двух подарков.</li>
+        <li>После четырёх тайников отправляйся к 🚪. Если потеряешься, бесплатная подсказка покажет следующий шаг.</li>
+        <li>Закончились ходы? Сделай чайную паузу: она бесплатно добавит 12 ходов. Подарки не пропадут.</li>
+        <li>В коллекции отметь до четырёх разных подарков, впиши имя и выбери открытку.
+          Можно смешивать подарки от разных персонажей.</li>
+      </ol>
+      <p class="small muted">Коллекция сохраняется в этом браузере, если доступно локальное хранилище.
+        Сам лабиринт после перезагрузки начинается заново.</p>
+    </details>
+  </section>
+
+  <section class="panel">
+    <div class="section-head"><span class="number">1</span><h2>Кто приготовил тебе сюрприз?</h2></div>    <div class="character-grid" id="characters"></div>
+    <div class="start-line">
+      <p id="characterMood" class="muted"></p>
+      <button class="primary" id="startButton">✨ Войти в лабиринт</button>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="panel game-panel" id="gameSection">
+      <div class="section-head"><span class="number">2</span><h2>Тайные коридоры</h2></div>
+      <div id="gameEmpty" class="empty-state">
+        <span class="big">🏰</span>
+        <h3>Замок уже зажёг свечи</h3>
+        <p>Выбери спутника выше и войди в лабиринт.<br>Твоя посылка где-то совсем рядом.</p>
+      </div>
+      <div id="gameContent" hidden>
+        <div class="stats">
+          <div class="stat">Ходы: <strong id="moves">0</strong></div>
+          <div class="stat">Тайники: <strong id="found">0 / 4</strong></div>
+          <div class="stat" id="companion"></div>
+        </div>
+        <div class="board-shell">
+          <div id="board" class="board" aria-hidden="true"></div>
+        </div>
+        <div class="legend">
+          <span>✨ ты</span><span>🎁 тайник</span><span>🚪 выход</span><span>🧱 стены</span>
+        </div>
+        <p id="gameMessage" class="game-message" role="status" aria-live="polite"></p>
+        <div class="controls">
+          <div class="dpad" aria-label="Управление движением">
+            <button class="up" data-dir="up" aria-label="Шаг вверх">↑</button>
+            <button class="left" data-dir="left" aria-label="Шаг влево">←</button>
+            <button class="down" data-dir="down" aria-label="Шаг вниз">↓</button>
+            <button class="right" data-dir="right" aria-label="Шаг вправо">→</button>
+          </div>
+          <div class="tools">
+            <button id="hintButton">🕯 Подсказка</button>
+            <button id="teaButton" hidden>☕ +12 ходов</button>
+          </div>
+        </div>
+        <p class="small muted" style="text-align:center;margin:14px 0 0">На телефоне можно листать коридоры свайпами по карте.</p>
+      </div>
+    </section>
+
+    <div>
+      <section class="panel" id="collectionSection">
+        <div class="section-head">
+          <span class="number">3</span><h2>Твой подарочный микс</h2>
+          <span class="mix-count" id="mixCount">0 / 4</span>
+        </div>
+        <p class="collection-note">Нажми на подарки, которые хочешь положить в посылку.
+          Смешивай романтику, уют и щепотку озорства.</p>
+        <div id="collectionEmpty" class="empty-state" style="padding:15px">
+          🛍 Здесь появятся находки из лабиринта.
+        </div>
+        <div class="collection" id="collection"></div>
+      </section>
+
+      <section class="panel" id="letterSection">
+        <div class="section-head"><span class="number">4</span><h2>Письмо и открытка</h2></div>
+        <label for="recipient">Для кого эта магия?</label>
+        <input id="recipient" maxlength="40" placeholder="Твоё имя или имя подруги" autocomplete="given-name">
+        <div class="card-options" id="cardOptions" aria-label="Настроение открытки"></div>
+        <div class="letter" id="letterPreview"></div>
+        <div class="actions">
+          <button class="primary" id="shareGift">💌 Поделиться подарком</button>
+          <button id="downloadLetter">↓ Скачать письмо</button>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">Письмо скачивается как текстовый файл.
+          Ссылка на подарок содержит выбранный микс и открытку.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="wrap">
+  <div class="footer-actions">
+    <button id="shareGame">🔗 Пригласить подругу</button>
+    <button class="secondary" id="clearCollection">Очистить коллекцию</button>
+  </div>
+  <p>Неофициальная фанатская мини-игра. Часть подарков — фантазии по мотивам волшебного мира.
+    Никаких покупок, регистрации и внешних загрузок.</p>
+  <p id="storageNote"></p>
+</footer>
+
+<dialog id="modal" aria-labelledby="modalTitle">
+  <h2 id="modalTitle"></h2>
+  <div id="modalBody"></div>
+  <div id="modalActions" class="dialog-actions"></div>
+</dialog><div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const characters = [
+  {
+    id: "harry", name: "Гарри Поттер", emoji: "⚡",
+    tag: "Смелость и тёплые воспоминания",
+    mood: "«Даже в самом запутанном коридоре найдётся немного света».",
+    gifts: [
+      ["🧣", "Шарф Гриффиндора", "Чтобы храбрость всегда была под рукой."],
+      ["🗺️", "Карта Мародёров", "Для прогулок, которые хочется оставить маленьким секретом."],
+      ["🪽", "Подвеска «Золотой снитч»", "Твоё маленькое напоминание: лови счастливые моменты."],
+      ["🧹", "Миниатюра «Молнии»", "Для рабочего стола и мечтаний о полётах."],
+      ["🧦", "Носки для свободного эльфа", "Очень уютный символ свободы быть собой."],
+      ["🫙", "Баночка света «Люмос»", "Воображаемый светильник для самых тихих вечеров."],
+      ["🧥", "Мантия-невидимка", "Когда хочется ненадолго исчезнуть из всех чатов."],
+      ["📸", "Альбом движущихся фотографий", "Для воспоминаний, которые не умеют стоять на месте."]
+    ]
+  },
+  {
+    id: "ron", name: "Рон Уизли", emoji: "🧡",
+    tag: "Сладости, уют и немного хаоса",
+    mood: "«Сначала подарок. Потом чай. Потом ещё что-нибудь вкусное».",
+    gifts: [
+      ["🍫", "Шоколадная лягушка", "Сладкий сюрприз с карточкой волшебника."],
+      ["🍬", "Драже «Берти Боттс»", "Для тех дней, когда хочется неожиданностей."],
+      ["♟️", "Волшебные шахматы", "Партия, которая точно не будет скучной."],
+      ["🧶", "Свитер миссис Уизли", "Почти как объятие, только с рукавами."],
+      ["🍺", "Сливочное пиво", "Волшебный напиток для уютного вечера в Хогсмиде."],
+      ["🥧", "Тыквенные пирожки", "Небольшой запас счастья из Хогвартс-экспресса."],
+      ["🎇", "Фейерверк близнецов", "Карманный праздник в стиле Уизли."],
+      ["📻", "Волшебное радио", "Любимые мелодии для кухни, где всегда кто-то смеётся."]
+    ]
+  },
+  {
+    id: "hermione", name: "Гермиона Грейнджер", emoji: "📚",
+    tag: "Умные находки и время для себя",
+    mood: "«В расписании обязательно должно быть место для маленьких радостей».",
+    gifts: [
+      ["⏳", "Подвеска «Маховик времени»", "В память о том, как важно находить время для себя."],
+      ["📖", "«История Хогвартса»", "Идеальная книга для вечера без спешки."],
+      ["👜", "Сумочка с незримым расширением", "В неё помещаются планы, книги и ещё одна книга."],
+      ["🪶", "Перо для блестящих идей", "Для мыслей, которые заслуживают красивых страниц."],
+      ["🧪", "Набор юного зельевара", "Миниатюрные флаконы и большая любовь к экспериментам."],
+      ["🌿", "Закладка с мандрагорой", "Совершенно тихая. В отличие от оригинала."],
+      ["🕯️", "Свеча «Библиотека Хогвартса»", "Воображаемый аромат дерева, бумаги и спокойствия."],
+      ["📓", "Планер заклинаний", "Не список обязанностей, а место для вдохновения."]
+    ]
+  },
+  {
+    id: "draco", name: "Драко Малфой", emoji: "🐍",
+    tag: "Изумруд, серебро и эффектные жесты",
+    mood: "«Разумеется, я выбрал лучшее. Как будто могло быть иначе».",
+    gifts: [
+      ["💍", "Кольцо со змеёй", "Серебристый акцент для уверенного настроения."],
+      ["🧣", "Шарф Слизерина", "Насыщенный изумруд и безупречная мягкость."],
+      ["🪞", "Карманное волшебное зеркало", "Чтобы лишний раз убедиться: ты великолепна."],
+      ["🖋️", "Серебряное перо", "Для подписей, которые невозможно не заметить."],
+      ["🕯️", "Свеча «Гостиная Слизерина»", "Фантазия о прохладе озера и тихом потрескивании огня."],
+      ["🗝️", "Подвеска «Ключ от замка»", "Некоторые двери открываются только тебе."],
+      ["🎀", "Бархатная лента для мантии", "Маленькая деталь с большим характером."],
+      ["🍐", "Конфеты из «Сладкого королевства»", "Коробочка, которую было бы жаль не подарить."]
+    ]
+  },
+  {
+    id: "rat", name: "Кароста (крыса)", emoji: "🐀",
+    tag: "Тайники и странно милые сокровища",
+    mood: "В названиях она не разбирается. Зато точно знает, где спрятано блестящее.",
+    gifts: [
+      ["🪙", "Блестящий галеон", "Найден под шкафом. Наверное, на удачу."],
+      ["🧵", "Ленточка с хогвартской посылки", "Трофей из самого секретного угла."],      ["🧀", "Сыр из Большого зала", "Самое ценное сокровище по версии крысы."],
+      ["🧭", "Компас тайных ходов", "Фантазийная находка для любительницы обходных путей."],
+      ["🧷", "Значок Хогвартс-экспресса", "Слегка погрызенный, но полный воспоминаний."],
+      ["🥄", "Ложечка из Большого зала", "Не спрашивай, как она оказалась в тайнике."],
+      ["🪨", "Камешек с берега Чёрного озера", "Очень гладкий. Очень важный."],
+      ["📦", "Коробочка крысиных секретов", "Для крошечных вещей с большой историей."]
+    ]
+  },
+  {
+    id: "hedwig", name: "Букля (сова)", emoji: "🦉",
+    tag: "Нежные письма и снежная магия",
+    mood: "Букля доставляет не просто посылки. Иногда — именно то тепло, которого не хватало.",
+    gifts: [
+      ["🪶", "Белое совиное перо", "Тихое напоминание о верности и заботе."],
+      ["✉️", "Конверт с сургучной печатью", "Для слов, которые хочется сохранить."],
+      ["❄️", "Снежный шар «Хогвартс»", "Маленькая зима, которая всегда рядом."],
+      ["🎗️", "Лента совиной почты", "Чтобы красиво перевязать самое важное."],
+      ["🌙", "Подвеска «Ночная доставка»", "Месяц, звёзды и силуэт белой совы."],
+      ["🫖", "Кружка с Буклей", "Для какао после длинного дня."],
+      ["📮", "Набор открыток из Хогсмида", "Маленькие путешествия, которые помещаются в конверт."],
+      ["🧤", "Варежки «Снежная сова»", "Тепло, доставленное прямо в ладони."]
+    ]
+  }
+];
+
+const cards = [
+  { id: "warm", label: "🕯 Уют",
+    title: "Для твоего уютного вечера",
+    text: "Пусть сегодня будет меньше «надо» и больше тёплого чая, любимых историй и времени для себя." },
+  { id: "magic", label: "✨ Вдохновение",
+    title: "Ты и есть немного магия",
+    text: "Тебе не нужна волшебная палочка, чтобы менять свой мир. Но немного хогвартского вдохновения никогда не помешает." },
+  { id: "tender", label: "🌷 Нежность",
+    title: "Просто потому, что ты — это ты",
+    text: "Пусть рядом будут люди, с которыми можно быть собой. А маленькие чудеса находят тебя даже в самый обычный день." }
+];
+
+const giftMap = new Map();
+characters.forEach(c => {
+  c.gifts = c.gifts.map((g, i) => {
+    const gift = { id: `${c.id}-${i}`, emoji: g[0], name: g[1], description: g[2], owner: c.name };
+    giftMap.set(gift.id, gift);
+    return gift;
+  });
+});
+
+const STORAGE_KEY = "hogwarts-gifts-v1";
+let chosen = "harry";
+let inventory = [];
+let mix = [];
+let recipient = "";
+let cardId = "warm";
+let run = null;
+let hintCell = -1;
+let pendingGift = false;
+let modalLocked = false;
+let toastTimer;
+let storageAvailable = true;
+
+function load() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+    if (!data || typeof data !== "object") return;
+    if (characters.some(c => c.id === data.chosen)) chosen = data.chosen;
+    if (Array.isArray(data.inventory))
+      inventory = [...new Set(data.inventory.filter(id => giftMap.has(id)))];
+    if (Array.isArray(data.mix))
+      mix = [...new Set(data.mix.filter(id => inventory.includes(id)))].slice(0, 4);
+    if (typeof data.recipient === "string") recipient = data.recipient.slice(0, 40);
+    if (cards.some(c => c.id === data.cardId)) cardId = data.cardId;
+  } catch (e) { storageAvailable = false; }
+}
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ chosen, inventory, mix, recipient, cardId }));
+  } catch (e) {
+    storageAvailable = false;
+    $("storageNote").textContent = "Браузер не разрешил сохранение. Коллекция доступна до закрытия страницы.";
+  }
+}
+
+function node(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
+
+function toast(text) {
+  clearTimeout(toastTimer);
+  $("toast").textContent = text;
+  $("toast").hidden = false;
+  toastTimer = setTimeout(() => $("toast").hidden = true, 3300);
+}
+
+function closeModal() {
+  modalLocked = false;
+  $("modal").close();
+}
+
+function openModal(title, text, actions, locked = false) {
+  if ($("modal").open) closeModal();
+  modalLocked = locked;
+  $("modalTitle").textContent = title;  $("modalBody").replaceChildren();
+  if (text) $("modalBody").append(node("p", "dialog-text", text));
+  $("modalActions").replaceChildren();
+  actions.forEach(a => {
+    const b = node("button", a.primary ? "primary" : "", a.label);
+    b.addEventListener("click", () => {
+      closeModal();
+      if (a.action) a.action();
+    });
+    $("modalActions").append(b);
+  });
+  $("modal").showModal();
+}
+
+$("modal").addEventListener("cancel", e => {
+  if (modalLocked) e.preventDefault();
+});
+
+function renderCharacters() {
+  $("characters").replaceChildren();
+  characters.forEach(c => {
+    const b = node("button", "character");
+    b.setAttribute("aria-pressed", String(c.id === chosen));
+    b.append(node("span", "emoji", c.emoji), node("strong", "", c.name), node("small", "", c.tag));
+    b.addEventListener("click", () => {
+      chosen = c.id;
+      renderCharacters();
+      save();
+    });
+    $("characters").append(b);
+  });
+  $("characterMood").textContent = characters.find(c => c.id === chosen).mood;
+}
+
+/* Лабиринт 11 × 11: все коридоры связаны. */
+const N = 11;
+const directions = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+const indexOf = (x, y) => y * N + x;
+const point = i => [i % N, Math.floor(i / N)];
+
+function shuffle(items) {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function makeMaze() {
+  const map = Array(N * N).fill(0);
+  const stack = [[1, 1]];
+  map[indexOf(1, 1)] = 1;
+  while (stack.length) {
+    const [x, y] = stack[stack.length - 1];
+    const options = shuffle(Object.values(directions)).filter(([dx, dy]) => {
+      const nx = x + dx * 2, ny = y + dy * 2;
+      return nx > 0 && ny > 0 && nx < N - 1 && ny < N - 1 && !map[indexOf(nx, ny)];
+    });
+    if (!options.length) { stack.pop(); continue; }
+    const [dx, dy] = options[0];
+    map[indexOf(x + dx, y + dy)] = 1;
+    map[indexOf(x + dx * 2, y + dy * 2)] = 1;
+    stack.push([x + dx * 2, y + dy * 2]);
+  }
+  return map;
+}
+
+function neighbors(map, at) {
+  const [x, y] = point(at);
+  return Object.values(directions).map(([dx, dy]) => [x + dx, y + dy])
+    .filter(([nx, ny]) => nx >= 0 && ny >= 0 && nx < N && ny < N && map[indexOf(nx, ny)])
+    .map(([nx, ny]) => indexOf(nx, ny));
+}
+
+function pathBetween(map, from, to) {
+  const queue = [from], parent = new Map([[from, null]]);
+  for (let k = 0; k < queue.length; k++) {
+    const current = queue[k];
+    if (current === to) break;
+    for (const next of neighbors(map, current)) {
+      if (!parent.has(next)) { parent.set(next, current); queue.push(next); }
+    }
+  }
+  if (!parent.has(to)) return [];
+  const path = [];
+  for (let p = to; p !== null; p = parent.get(p)) path.push(p);
+  return path.reverse();
+}
+
+function permutations(a) {
+  if (!a.length) return [[]];
+  return a.flatMap((value, i) =>
+    permutations(a.filter((_, j) => i !== j)).map(rest => [value, ...rest]));
+}
+
+function startRun() {
+  const map = makeMaze();
+  const start = indexOf(1, 1);
+  const cells = map.map((v, i) => v ? i : -1).filter(i => i !== -1 && i !== start);
+  const distance = (a, b) => pathBetween(map, a, b).length - 1;
+  const exit = cells.reduce((best, i) => distance(start, i) > distance(start, best) ? i : best, cells[0]);
+  const candidates = shuffle(cells.filter(i => {
+    const [x, y] = point(i);
+    return i !== exit && x % 2 === 1 && y % 2 === 1 && distance(start, i) >= 4;
+  }));
+  const positions = [];
+  while (positions.length < 4) {
+    const anchors = [start, exit, ...positions];
+    candidates.sort((a, b) =>
+      Math.min(...anchors.map(p => distance(b, p))) -
+      Math.min(...anchors.map(p => distance(a, p))));
+    positions.push(candidates.shift());
+  }
+  const bestRoute = Math.min(...permutations(positions).map(order => {
+    const route = [start, ...order, exit];
+    return route.slice(1).reduce((total, p, i) => total + distance(route[i], p), 0);
+  }));
+  const companion = characters.find(c => c.id === chosen);
+  const pairs = shuffle([0, 1, 2, 3]);
+  run = {    map, pos: start, exit, character: chosen,
+    moves: bestRoute + 12, used: 0, visited: new Set([start]), finished: false,
+    caches: positions.map((pos, i) => ({
+      pos, taken: false, gifts: companion.gifts.slice(pairs[i] * 2, pairs[i] * 2 + 2)
+    }))
+  };
+  pendingGift = false;
+  hintCell = -1;
+  $("gameEmpty").hidden = true;
+  $("gameContent").hidden = false;
+  renderGame();
+  say("Вперёд! Собери четыре тайника 🎁, а потом найди выход 🚪.");
+  $("gameSection").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function say(text) { $("gameMessage").textContent = text; }
+
+function renderGame() {
+  if (!run) return;
+  $("board").replaceChildren();
+  run.map.forEach((open, i) => {
+    const cell = node("div", "cell " + (open ? "path" : "wall"));
+    if (run.visited.has(i)) cell.classList.add("visited");
+    const cache = run.caches.find(c => c.pos === i && !c.taken);
+    if (cache) { cell.textContent = "🎁"; cell.classList.add("present"); }
+    if (i === run.exit) { cell.textContent = "🚪"; cell.classList.add("exit"); }
+    if (i === hintCell) cell.classList.add("hint");
+    if (i === run.pos) { cell.textContent = "✨"; cell.classList.add("player"); }
+    $("board").append(cell);
+  });
+  $("moves").textContent = run.moves;
+  $("found").textContent = `${run.caches.filter(c => c.taken).length} / 4`;
+  const c = characters.find(c => c.id === run.character);
+  $("companion").textContent = `${c.emoji} ${c.name}`;
+  document.querySelectorAll("[data-dir]").forEach(b => {
+    b.disabled = run.finished || run.moves === 0 || pendingGift;
+  });
+  $("hintButton").disabled = run.finished || pendingGift;
+  $("teaButton").hidden = run.moves > 0 || run.finished || pendingGift;
+}
+
+function move(dir) {
+  if (!run || run.finished || pendingGift || $("modal").open) return;
+  if (run.moves <= 0) { say("Самое время для чая ☕ Нажми «+12 ходов»."); return; }
+  const [dx, dy] = directions[dir];
+  const [x, y] = point(run.pos);
+  const nx = x + dx, ny = y + dy;
+  if (nx < 0 || ny < 0 || nx >= N || ny >= N || !run.map[indexOf(nx, ny)]) {
+    say("Здесь стена. Попробуй другой коридор — ход не потрачен.");
+    return;
+  }
+  run.pos = indexOf(nx, ny);
+  run.moves--;
+  run.used++;
+  run.visited.add(run.pos);
+  hintCell = -1;
+  const cache = run.caches.find(c => c.pos === run.pos && !c.taken);
+  renderGame();
+  if (cache) { chooseGift(cache); return; }
+  checkPosition();
+}
+
+function checkPosition() {
+  if (run.pos === run.exit) {
+    const remaining = run.caches.filter(c => !c.taken).length;
+    if (!remaining) { finishRun(); return; }
+    say(`Дверь ждёт все подарки. Осталось тайников: ${remaining}.`);
+  } else {
+    const [x, y] = point(run.pos);
+    say(`Ты в коридоре: строка ${y + 1}, столбец ${x + 1}. ${run.caches.every(c => c.taken) ? "Теперь к выходу 🚪!" : "Ищи следующий тайник 🎁."}`);
+  }
+  if (run.moves === 0) say("Ходы закончились, но приключение продолжается. Чайная пауза добавит ещё 12 ☕");
+}
+
+function chooseGift(cache) {
+  pendingGift = true;
+  renderGame();
+  const companion = characters.find(c => c.id === run.character);
+  openModal(`${companion.emoji} Тайник от ${companion.name}`,
+    "Здесь два сюрприза. Какой заберёшь с собой? Второй можно найти в следующем приключении.", [], true);
+  cache.gifts.forEach(gift => {
+    const b = node("button", "choice");
+    const info = node("div");
+    info.append(node("strong", "", gift.name), node("small", "", gift.description));
+    if (inventory.includes(gift.id)) info.append(node("small", "", "✓ Уже есть в твоей коллекции"));
+    b.append(node("span", "", gift.emoji), info);
+    b.addEventListener("click", () => {
+      closeModal();
+      cache.taken = true;
+      pendingGift = false;
+      const isNew = !inventory.includes(gift.id);
+      if (isNew) inventory.push(gift.id);
+      if (mix.length < 4 && !mix.includes(gift.id)) mix.push(gift.id);
+      save();
+      renderCollection();
+      renderLetter();
+      renderGame();
+      checkPosition();
+      toast(isNew ? `${gift.emoji} Добавлено: ${gift.name}` : "Этот подарок уже сохранён. Тайник засчитан!");
+    });    $("modalActions").append(b);
+  });
+}
+
+function finishRun() {
+  run.finished = true;
+  renderGame();
+  say(`Посылка собрана! Пройдено шагов: ${run.used}. Теперь можно оформить письмо или выбрать другого спутника.`);
+  openModal("🦉 Букля готова к вылету!",
+    `Все четыре тайника найдены, и ты вышла из лабиринта за ${run.used} шагов.\n\nСобери подарочный микс, выбери открытку и отправь немного магии себе или подруге.`,
+    [
+      { label: "💌 Оформить посылку", primary: true, action: () => $("collectionSection").scrollIntoView({ behavior: "smooth" }) },
+      { label: "Ещё одно приключение", action: () => $("characters").scrollIntoView({ behavior: "smooth", block: "center" }) }
+    ]);
+}
+
+$("startButton").addEventListener("click", () => {
+  if (run && !run.finished) {
+    openModal("Начать новый маршрут?",
+      "Текущий лабиринт сменится. Все уже выбранные подарки останутся в коллекции.",
+      [{ label: "Остаться в этом", primary: true }, { label: "Начать новый", action: startRun }]);
+  } else startRun();
+});
+
+document.querySelectorAll("[data-dir]").forEach(b => b.addEventListener("click", () => move(b.dataset.dir)));
+
+document.addEventListener("keydown", e => {
+  if (!run || run.finished || $("modal").open || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  const keys = { ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right",
+    w: "up", s: "down", a: "left", d: "right", ц: "up", ы: "down", ф: "left", в: "right" };
+  const dir = keys[e.key] || keys[e.key.toLowerCase()];
+  if (dir) { e.preventDefault(); move(dir); }
+});
+
+let swipeStart = null;
+$("board").addEventListener("pointerdown", e => {
+  swipeStart = { x: e.clientX, y: e.clientY, id: e.pointerId };
+  $("board").setPointerCapture(e.pointerId);
+});
+$("board").addEventListener("pointerup", e => {
+  if (!swipeStart || swipeStart.id !== e.pointerId) return;
+  const dx = e.clientX - swipeStart.x, dy = e.clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+  move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : (dy > 0 ? "down" : "up"));
+});
+$("board").addEventListener("pointercancel", () => swipeStart = null);
+
+$("hintButton").addEventListener("click", () => {
+  if (!run || run.finished || pendingGift) return;
+  const targets = run.caches.filter(c => !c.taken).map(c => c.pos);
+  if (!targets.length) targets.push(run.exit);
+  const paths = targets.map(t => pathBetween(run.map, run.pos, t)).sort((a, b) => a.length - b.length);
+  const path = paths[0];
+  hintCell = path[1] ?? run.pos;
+  renderGame();
+  const [x, y] = point(run.pos), [nx, ny] = point(hintCell);
+  const direction = nx > x ? "вправо →" : nx < x ? "влево ←" : ny > y ? "вниз ↓" : "вверх ↑";
+  say(`Следующий шаг: ${direction}. До ${targets[0] === run.exit && targets.length === 1 ? "выхода" : "ближайшего тайника"} — ${path.length - 1} шагов. Подсказка бесплатна.`);
+});
+
+$("teaButton").addEventListener("click", () => {
+  if (!run || run.moves > 0 || run.finished) return;
+  run.moves += 12;
+  renderGame();
+  say("Глоток чая, глубокий вдох — и ещё 12 ходов. Ты никуда не опаздываешь ☕");
+});
+
+function renderCollection() {
+  $("collection").replaceChildren();
+  $("collectionEmpty").hidden = inventory.length > 0;
+  $("mixCount").textContent = `${mix.length} / 4`;
+  inventory.forEach(id => {
+    const gift = giftMap.get(id);
+    const selected = mix.includes(id);
+    const b = node("button", "gift-card");
+    b.setAttribute("aria-pressed", String(selected));
+    b.setAttribute("aria-label", `${gift.name}. ${gift.description} От ${gift.owner}. ${selected ? "Убрать из микса" : "Добавить в микс"}`);
+    b.append(node("span", "gift-icon", gift.emoji),
+      node("strong", "", `${selected ? "✓ " : ""}${gift.name}`),
+      node("small", "", gift.owner));
+    b.addEventListener("click", () => {
+      if (mix.includes(id)) mix = mix.filter(g => g !== id);
+      else if (mix.length < 4) mix.push(id);
+      else { toast("В посылке максимум 4 подарка. Сначала убери один из выбранных."); return; }
+      save();      renderCollection();
+      renderLetter();
+    });
+    $("collection").append(b);
+  });
+  $("shareGift").disabled = mix.length === 0;
+}
+
+function renderCards() {
+  $("cardOptions").replaceChildren();
+  cards.forEach(card => {
+    const b = node("button", "", card.label);
+    b.setAttribute("aria-pressed", String(card.id === cardId));
+    b.addEventListener("click", () => {
+      cardId = card.id;
+      save();
+      renderCards();
+      renderLetter();
+    });
+    $("cardOptions").append(b);
+  });
+}
+
+function letterData(name = recipient, ids = mix, selectedCard = cardId) {
+  const card = cards.find(c => c.id === selectedCard) || cards[0];
+  const gifts = ids.map(id => giftMap.get(id)).filter(Boolean);
+  return { name: name.trim() || "Юная волшебница", card, gifts };
+}
+
+function buildLetter(data) {
+  const root = node("div");
+  const top = node("div", "letter-top");
+  top.append(node("div", "crest", "🏰"), node("h3", "", "ХОГВАРТС"),
+    node("small", "", "Отдел маленьких чудес · Совиная почта"));
+  root.append(top, node("hr"), node("p", "serif", `${data.name},`),
+    node("p", "", "Замок приглашает тебя на вечер, в котором можно никуда не спешить, выбирать сердцем и радоваться маленьким вещам."));
+  if (data.gifts.length) {
+    root.append(node("p", "", "В твоей волшебной посылке:"));
+    const list = node("ul");
+    data.gifts.forEach(g => list.append(node("li", "", `${g.emoji} ${g.name} — ${g.owner}`)));
+    root.append(list);
+  } else root.append(node("p", "", "Место для подарков уже приготовлено. Выбери находки из своей коллекции — и Букля упакует их для тебя."));
+  const postcard = node("div", "postcard");
+  postcard.append(node("strong", "", `💌 ${data.card.title}`), node("p", "", data.card.text));
+  root.append(postcard,
+    node("p", "serif", "С теплом и щепоткой волшебства,\nтвои друзья из Хогвартса"),
+    node("div", "seal", "🕯️ 🦉"));
+  return root;
+}
+
+function renderLetter() {
+  $("letterPreview").replaceChildren(buildLetter(letterData()));
+  $("shareGift").disabled = mix.length === 0;
+}
+
+$("recipient").addEventListener("input", e => {
+  recipient = e.target.value.slice(0, 40);
+  save();
+  renderLetter();
+});
+
+function letterText(data) {
+  return [
+    "ХОГВАРТС — Отдел маленьких чудес",
+    "Совиная почта", "", `${data.name},`, "",
+    "Замок приглашает тебя на вечер, в котором можно никуда не спешить, выбирать сердцем и радоваться маленьким вещам.",
+    "", data.gifts.length ? "В твоей волшебной посылке:" : "Твоя посылка ждёт первых подарков.",
+    ...data.gifts.map(g => `${g.emoji} ${g.name} — ${g.owner}\n${g.description}`),
+    "", `ОТКРЫТКА: ${data.card.title}`, data.card.text, "",
+    "С теплом и щепоткой волшебства,",
+    "твои друзья из Хогвартса"
+  ].join("\n");
+}
+
+$("downloadLetter").addEventListener("click", () => {
+  const blob = new Blob(["\uFEFF" + letterText(letterData())], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Письмо-из-Хогвартса.txt";
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+});
+
+function hosted() { return /^https?:$/.test(location.protocol); }
+
+function publicationHelp() {
+  openModal("🔗 Как получить ссылку",
+    "Сейчас игра открыта как локальный файл. Такой адрес нельзя отправить подруге.\n\n1. Сохрани файл как index.html.\n2. Положи его в отдельную папку.\n3. Опубликуй папку через Netlify Drop или загрузи index.html на GitHub Pages.\n4. Открой выданный сайтом HTTPS-адрес и нажми кнопку отправки ещё раз.\n\nДля публикации нужен интернет. После этого игра откроется по ссылке и на телефоне.",
+    [{ label: "Понятно", primary: true }]);
+}
+
+function baseURL() {
+  const url = new URL(location.href);
+  url.hash = "";
+  return url;
+}
+
+async function shareOrCopy(title, text, url) {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, text, url });
+      return;
+    } catch (e) {
+      if (e.name === "AbortError") return;
+    }
+  }
+  try {    if (!navigator.clipboard) throw new Error("Clipboard unavailable");
+    await navigator.clipboard.writeText(url);
+    toast("Ссылка скопирована. Отправь её подруге 💌");
+  } catch (e) {
+    openModal("Скопируй ссылку",
+      "Нажми на поле, выдели адрес и скопируй его.",
+      [{ label: "Готово", primary: true }]);
+    const field = node("input");
+    field.readOnly = true;
+    field.value = url;
+    field.setAttribute("aria-label", "Ссылка для отправки");
+    field.addEventListener("click", () => field.select());
+    $("modalBody").append(field);
+    field.focus();
+    field.select();
+  }
+}
+
+$("shareGame").addEventListener("click", () => {
+  if (!hosted()) { publicationHelp(); return; }
+  shareOrCopy("Подарки от Гарри Поттера",
+    "Выбери спутника, пройди лабиринт Хогвартса и собери свою волшебную посылку!",
+    baseURL().href);
+});
+
+$("shareGift").addEventListener("click", () => {
+  if (!mix.length) { toast("Сначала выбери хотя бы один подарок."); return; }
+  if (!hosted()) { publicationHelp(); return; }
+  const data = { v: 1, name: recipient, gifts: mix, card: cardId };
+  const url = baseURL();
+  url.hash = "gift=" + encodeURIComponent(JSON.stringify(data));
+  shareOrCopy("Тебе посылка из Хогвартса!",
+    "Букля принесла тебе подарки и маленькое письмо 💌", url.href);
+});
+
+function receiveGift() {
+  if (!location.hash.startsWith("#gift=")) return;
+  try {
+    if (location.hash.length > 5000) throw new Error("Too long");
+    const payload = JSON.parse(decodeURIComponent(location.hash.slice(6)));
+    if (!payload || payload.v !== 1 || typeof payload.name !== "string" ||
+        !Array.isArray(payload.gifts) || !payload.gifts.length || payload.gifts.length > 4 ||
+        !payload.gifts.every(id => giftMap.has(id)) ||
+        !cards.some(c => c.id === payload.card)) throw new Error("Invalid gift");
+    const ids = [...new Set(payload.gifts)];
+    const data = letterData(payload.name.slice(0, 40), ids, payload.card);
+    openModal("🦉 Тебе посылка из Хогвартса!", "", [
+      {
+        label: "✨ Забрать в коллекцию", primary: true,
+        action: () => {
+          inventory = [...new Set([...inventory, ...ids])];
+          mix = ids;
+          recipient = payload.name.slice(0, 40);
+          cardId = payload.card;
+          $("recipient").value = recipient;
+          save();
+          renderCollection();
+          renderCards();
+          renderLetter();
+          toast("Посылка сохранена. Теперь можно собрать свой ответ!");
+          try { history.replaceState(null, "", baseURL().href); } catch (e) {}
+          $("letterSection").scrollIntoView({ behavior: "smooth" });
+        }
+      },
+      { label: "Просто посмотреть игру" }
+    ]);
+    const preview = node("div", "letter");
+    preview.append(buildLetter(data));
+    $("modalBody").append(preview);
+  } catch (e) {
+    toast("Ссылка на подарок повреждена. Но ты можешь собрать новый!");
+  }
+}
+
+$("clearCollection").addEventListener("click", () => {
+  if (!inventory.length) { toast("В коллекции пока нет подарков."); return; }
+  openModal("Очистить коллекцию?",
+    "Все собранные подарки и текущий маршрут будут удалены только из этого браузера. Отменить это действие нельзя.",
+    [
+      { label: "Оставить мои подарки", primary: true },
+      {
+        label: "Да, очистить",
+        action: () => {
+          inventory = [];
+          mix = [];
+          run = null;
+          pendingGift = false;
+          $("gameContent").hidden = true;
+          $("gameEmpty").hidden = false;
+          save();
+          renderCollection();
+          renderLetter();
+          toast("Чистая страница. Впереди новые приключения ✨");
+        }
+      }
+    ]);
+});
+
+load();
+$("recipient").value = recipient;
+renderCharacters();
+renderCollection();
+renderCards();
+renderLetter();
+if (!storageAvailable)
+  $("storageNote").textContent = "Локальное сохранение недоступно. Не закрывай страницу, чтобы не потерять коллекцию.";
+receiveGift();
+</script>
+</body>
+</html>
